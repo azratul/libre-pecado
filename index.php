@@ -45,27 +45,18 @@ else {
       $sql .= $query_meal;
     }
 
-    $fichero = 'test.txt';
-    // Abre el fichero para obtener el contenido existente
-    $actual = file_get_contents($fichero);
-    // Añade una nueva persona al fichero
-    $actual .= $sql."\n";
-    // Escribe el contenido al fichero
-    file_put_contents($fichero, $actual);
-
-    $result = mysqli_query($conn, $sql);
-    $rows   = mysqli_fetch_assoc($result);
-
-    mysqli_close($conn);
-
-    if ($rows->num_rows > 0) {
-      while($row = $rows->fetch_assoc()) {
-        $message = $message.'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
+    if ($result = mysqli_query($conn, $sql)) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
       }
+
+      mysqli_free_result($result);
     }
     else {
-      $message = "No se han encontrado resultados para tu solicitud. ";
+      $message = 'No se han encontrado resultados para tu solicitud';
     }
+
+    mysqli_close($conn);
   }
 }
 
