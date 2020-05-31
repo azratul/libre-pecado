@@ -12,7 +12,6 @@ if (empty($data['queryResult']['parameters']['date-time'])) {
   $message = 'Es necesario que me digas la fecha de la que quieres saber el menú';
 }
 else {
-  // DB date format : en_US
   $db_host      = getenv('DB_HOST');
   $db_schema    = getenv('DB_SCHEMA');
   $db_username  = getenv('DB_USER');
@@ -30,16 +29,14 @@ else {
 
     // Get meal id
     if ($meal != '') {
-      $result = mysql_query("SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
-      $row    = mysql_fetch_assoc($result);
+      $result = mysqli_query("SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
+      $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
         $query_meal = ' AND meals_id = '.$row['meal_id'];
       }
     }
 
-    // Date  : Hoy, mañana, pasado mañana y toda la semana
-    // Meals : Desayuno, almuerzo, merienda, cena
     $sql = 'SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '.$date;
 
     if ($row['meal_id'] != null) {
