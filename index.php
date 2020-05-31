@@ -33,13 +33,13 @@ else {
       $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
-        $query_meal = ' AND meals_id = '.$row['meal_id'];
+        $query_meal = ' AND meals_id = '.$row['meals_id'];
       }
     }
 
     $sql = "SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '".$date."'";
 
-    if ($row['meal_id'] != null) {
+    if ($row['meals_id'] != null) {
       $sql .= $query_meal;
     }
 
