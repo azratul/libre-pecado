@@ -35,7 +35,7 @@ else {
       $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
-        $query_meal = ' AND meals_id = '.$row['meals_id'];
+        $query_meal = ' AND meals.meals_id = '.$row['meals_id'];
       }
     }
 
