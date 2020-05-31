@@ -12,6 +12,9 @@ if (empty($data['queryResult']['parameters']['date-time'])) {
   $message = 'Es necesario que me digas la fecha de la que quieres saber el menú';
 }
 else {
+  $date = strtotime($date);
+  $date = $date->format('Y/m/d');
+
   $db_host      = getenv('DB_HOST');
   $db_schema    = getenv('DB_SCHEMA');
   $db_username  = getenv('DB_USER');
