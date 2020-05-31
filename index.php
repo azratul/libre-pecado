@@ -29,7 +29,7 @@ else {
 
     // Get meal id
     if ($meal != '') {
-      $result = mysqli_query("SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
+      $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
       $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
