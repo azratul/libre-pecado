@@ -15,7 +15,7 @@ else {
   // DB date format : en_US
   $db_host      = getenv('DB_HOST');
   $db_schema    = getenv('DB_SCHEMA');
-  $db_username  = getenv('DB_USERNAME');
+  $db_username  = getenv('DB_USER');
   $db_pass      = getenv('DB_PASS');
 
   $message      = '';
