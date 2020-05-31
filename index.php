@@ -12,6 +12,8 @@ if (empty($data['queryResult']['parameters']['date-time'])) {
   $message = 'Es necesario que me digas la fecha de la que quieres saber el menú';
 }
 else {
+  $date = date('Y/m/d', strtotime($date));
+
   $db_host      = getenv('DB_HOST');
   $db_schema    = getenv('DB_SCHEMA');
   $db_username  = getenv('DB_USER');
@@ -29,17 +31,17 @@ else {
 
     // Get meal id
     if ($meal != '') {
-      $result = mysqli_query("SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
+      $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = '".$meal."' LIMIT 1");
       $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
-        $query_meal = ' AND meals_id = '.$row['meal_id'];
+        $query_meal = ' AND meals_id = '.$row['meals_id'];
       }
     }
 
-    $sql = 'SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '.$date;
+    $sql = "SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '".$date."'";
 
-    if ($row['meal_id'] != null) {
+    if ($row['meals_id'] != null) {
       $sql .= $query_meal;
     }
 
@@ -51,12 +53,14 @@ else {
     // Escribe el contenido al fichero
     file_put_contents($fichero, $actual);
 
-    $result = $conn->query($sql);
+    $result = mysqli_query($conn, $sql);
+    $rows   = mysqli_fetch_assoc($result);
+
     mysqli_close($conn);
 
-    if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-        $message = $message.'Para '.$result['meals_name'].' en el menú '.$result['type_name'].' hay '.$result['menu_description'];
+    if ($rows->num_rows > 0) {
+      while($row = $rows->fetch_assoc()) {
+        $message = $message.'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
       }
     }
     else {
