@@ -29,7 +29,7 @@ else {
 
     // Get meal id
     if ($meal != '') {
-      $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = ".$meal." LIMIT 1");
+      $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = '".$meal."' LIMIT 1");
       $row    = mysqli_fetch_assoc($result);
 
       if ($row) {
@@ -37,7 +37,7 @@ else {
       }
     }
 
-    $sql = 'SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '.$date;
+    $sql = "SELECT menu_date, menu_description, type_name, meals_name FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id INNER JOIN type ON menu.type_id = type.type_id WHERE menu_deleted = 0 AND menu_date = '".$date."'";
 
     if ($row['meal_id'] != null) {
       $sql .= $query_meal;
