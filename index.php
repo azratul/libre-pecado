@@ -43,12 +43,14 @@ else {
       $sql .= $query_meal;
     }
 
-    $result = $conn->query($sql);
+    $result = mysqli_query($conn, $sql);
+    $rows   = mysqli_fetch_assoc($result);
+
     mysqli_close($conn);
 
-    if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-        $message = $message.'Para '.$result['meals_name'].' en el menú '.$result['type_name'].' hay '.$result['menu_description'];
+    if ($rows->num_rows > 0) {
+      while($row = $rows->fetch_assoc()) {
+        $message = $message.'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
       }
     }
     else {
