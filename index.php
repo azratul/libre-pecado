@@ -2,7 +2,7 @@
 function checkMenu($data){
   $message = 'No se han encontrado resultados para tu solicitud';
 
-  if (empty($data['queryResult']['parameters']['date-time'])) {
+  if (!empty($data['queryResult']['parameters']['date-time'])) {
     $date = $data['queryResult']['parameters']['date-time'];
     $meal = $data['queryResult']['parameters']['comidas'];
     $date = date('Y/m/d', strtotime($date));
