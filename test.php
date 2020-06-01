@@ -42,7 +42,7 @@ echo '{
         "items": [
           {
             "simpleResponse": {
-              "textToSpeech": "'.$response.'"
+              "textToSpeech": "'.utf8_encode($response).'"
             }
           }
         ]
