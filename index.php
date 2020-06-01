@@ -27,7 +27,7 @@ function checkMenu($data){
         }
       }
 
-      $sql = "SELECT convert(menu_description USING utf8) as menu_description, type_name, meals_name ";
+      $sql = "SELECT menu_description, type_name, meals_name ";
       $sql.= "FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id ";
       $sql.= "INNER JOIN type ON menu.type_id = type.type_id ";
       $sql.= "WHERE menu_deleted = 0 AND menu_date = '".$date."'";
@@ -40,7 +40,7 @@ function checkMenu($data){
         if (mysqli_num_rows($result) > 0) {
           $message = '';
           while ($row = mysqli_fetch_assoc($result)) {
-            $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
+            $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.utf8_encode($row['menu_description']);
           }
         }
 

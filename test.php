@@ -7,7 +7,7 @@ function checkMenu($data){
 
   $conn = mysqli_connect($db_host, $db_username, $db_pass, $db_schema);
 
-  $sql = "SELECT menu_description as menu_description, type_name, meals_name ";
+  $sql = "SELECT menu_description, type_name, meals_name ";
   $sql.= "FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id ";
   $sql.= "INNER JOIN type ON menu.type_id = type.type_id ";
   $sql.= "WHERE menu_deleted = 0 AND menu_date = '2020/6/1' ";
@@ -17,7 +17,7 @@ function checkMenu($data){
     if (mysqli_num_rows($result) > 0) {
       $message = '';
       while ($row = mysqli_fetch_assoc($result)) {
-        $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
+        $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.utf8_encode($row['menu_description']);
       }
       return $message;
     }
@@ -42,7 +42,7 @@ echo '{
         "items": [
           {
             "simpleResponse": {
-              "textToSpeech": "'.utf8_encode($response).'"
+              "textToSpeech": "'.$response.'"
             }
           }
         ]
