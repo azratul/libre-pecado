@@ -1,7 +1,5 @@
 <?php
 function checkMenu($data){
-  $message = 'No se han encontrado resultados para tu solicitud';
-
   if (!empty($data['queryResult']['parameters']['date-time'])) {
     $date = $data['queryResult']['parameters']['date-time'];
     $meal = $data['queryResult']['parameters']['comidas'];
@@ -15,6 +13,7 @@ function checkMenu($data){
     $conn = mysqli_connect($db_host, $db_username, $db_pass, $db_schema);
 
     if ($conn) {
+      $message = 'No se han encontrado resultados para tu solicitud';
       // Get meal id
       if ($meal != '') {
         $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = '".$meal."' LIMIT 1");
