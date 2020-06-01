@@ -46,14 +46,19 @@ else {
     }
 
     if ($result = mysqli_query($conn, $sql)) {
-      while ($row = mysqli_fetch_assoc($result)) {
-        $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
+      if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
+        }
+      }
+      else {
+        $message = 'No se han encontrado resultados para tu solicitud';
       }
 
       mysqli_free_result($result);
     }
     else {
-      $message = 'No se han encontrado resultados para tu solicitud';
+      $message = 'Ha ocurrido un error al procesar tu solicitud.';
     }
 
     mysqli_close($conn);
