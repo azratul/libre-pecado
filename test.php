@@ -10,10 +10,8 @@ function checkMenu($data){
   $sql = "SELECT menu_description as menu_description, type_name, meals_name ";
   $sql.= "FROM menu INNER JOIN meals ON menu.meals_id = meals.meals_id ";
   $sql.= "INNER JOIN type ON menu.type_id = type.type_id ";
-  $sql.= "WHERE menu_deleted = 0 AND menu_date = '6/1/2020' ";
+  $sql.= "WHERE menu_deleted = 0 AND menu_date = '2020/6/1' ";
   $sql.= "AND meals.meals_id = 3";
-
-  echo $sql;
 
   if ($result = mysqli_query($conn, $sql)) {
     if (mysqli_num_rows($result) > 0) {
