@@ -68,7 +68,7 @@ else {
 echo '{
   "payload": {
     "google": {
-      "expectUserResponse": true,
+      "expectUserResponse": false,
       "richResponse": {
         "items": [
           {
