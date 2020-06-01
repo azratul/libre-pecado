@@ -8,6 +8,8 @@ date_default_timezone_set("America/Santiago");
 $date = $data['queryResult']['parameters']['date-time'];
 $meal = $data['queryResult']['parameters']['comidas'];
 
+$message = '';
+
 if (empty($data['queryResult']['parameters']['date-time'])) {
   $message = 'Es necesario que me digas la fecha de la que quieres saber el menú';
 }
@@ -18,8 +20,6 @@ else {
   $db_schema    = getenv('DB_SCHEMA');
   $db_username  = getenv('DB_USER');
   $db_pass      = getenv('DB_PASS');
-
-  $message      = '';
 
   $conn = mysqli_connect($db_host, $db_username, $db_pass, $db_schema);
 
