@@ -15,8 +15,6 @@ function checkMenu($data){
     $conn = mysqli_connect($db_host, $db_username, $db_pass, $db_schema);
 
     if ($conn) {
-      $meal_id = null;
-
       // Get meal id
       if ($meal != '') {
         $result = mysqli_query($conn, "SELECT meals_id FROM meals WHERE meals_name = '".$meal."' LIMIT 1");
@@ -40,7 +38,7 @@ function checkMenu($data){
         if (mysqli_num_rows($result) > 0) {
           $message = '';
           while ($row = mysqli_fetch_assoc($result)) {
-            $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.utf8_encode($row['menu_description']);
+            $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.utf8_encode($row['menu_description']).' ';
           }
         }
 

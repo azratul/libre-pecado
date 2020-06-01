@@ -10,6 +10,6 @@ Luego de que el asistente te responda, debes preguntar por el menú que deseas s
 
 ```¿Qué hay mañana para merendar?```
 
-En la frase anterior las variables son <mañana> y <merendar>, las cuales pueden ser cambiadas por <hoy> o <pasado mañana> y <desayunar>, <almorzar> o <cenar>.
+En la frase anterior las variables son [mañana] y [merendar], las cuales pueden ser cambiadas por [hoy] o [pasado mañana] y [desayunar], [almorzar] o [cenar].
 
 Continúa en dev stage.
