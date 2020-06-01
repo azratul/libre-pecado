@@ -13,6 +13,8 @@ function checkMenu($data){
   $sql.= "WHERE menu_deleted = 0 AND menu_date = '6/1/2020' ";
   $sql.= "AND meals.meals_id = 3";
 
+  echo $sql;
+
   if ($result = mysqli_query($conn, $sql)) {
     if (mysqli_num_rows($result) > 0) {
       $message = '';
