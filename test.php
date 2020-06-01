@@ -19,6 +19,7 @@ function checkMenu($data){
       while ($row = mysqli_fetch_assoc($result)) {
         $message.= 'Para '.$row['meals_name'].' en el menú '.$row['type_name'].' hay '.$row['menu_description'];
       }
+      return $message;
     }
 
     mysqli_free_result($result);
